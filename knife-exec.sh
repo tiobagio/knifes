@@ -5,8 +5,7 @@
 #	|n| n.run_list([]); \
 
 knife exec -E 'nodes.find("name:bca*") { \
-	|n| n.run_list << "role[base]"; \
-	n.run_list << "role[audit]"; \
+	|n| n.run_list << "role[audit]" unless n.run_list.include?("role[audit]"); \
 	puts n.name; \
 	n.save \
 }'
